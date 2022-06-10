@@ -27,8 +27,9 @@ const userOptions = () => {
         ],
       },
     ])
-    .then((userChoice) => {
-      switch (userChoice.userOptions) {
+    .then((res) => {
+        let choice = res.options;
+        switch (choice) {
         case "View all departments":
           viewDepartments();
           break;
@@ -56,3 +57,41 @@ const userOptions = () => {
     });
 };
 
+// View all departments
+const viewDepartments = () => {
+    db.query(
+      `SELECT department.id, department.name AS department FROM department;`,
+      (err, res) => {
+        if (err) throw err;
+        console.table(res);
+  
+        userOptions();
+      }
+    );
+  };
+
+// View all roles
+const viewRoles = () => {
+    db.query(
+      `SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id;`,
+      (err, res) => {
+        if (err) throw err;
+        console.table(res);
+  
+        userOptions();
+      }
+    );
+  };  
+
+// View all employees
+const viewEmployees = () => {
+    db.query(
+      `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;`,
+      (err, res) => {
+        if (err) throw err;
+        console.table(res);
+  
+        userOptions();
+      }
+    );
+  };  
