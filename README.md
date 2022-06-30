@@ -19,7 +19,9 @@ A command-line application that manages a company's employee database.
 
 ## Usage
 
+Link to video demonstration: [Employee Tracker Demo](https://drive.google.com/file/d/1diRTxscVOM_mHQJVzevexlz1PuH4CQ4s/view)
 
+![Video demonstration of how to use the app](assets/employee-tracker-demo.gif)
 ## Contribution
 
 Made by Mohamed Abdullahi
